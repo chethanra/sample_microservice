@@ -37,6 +37,7 @@ namespace Sample.City.Api.Controllers
         [ProducesResponseType(typeof(IReadOnlyCollection<City>), 200)]
         public async Task<IActionResult> Get()
         {
+            await Task.Yield();
             return (IActionResult)Ok(_cities);
         }
 
@@ -46,6 +47,7 @@ namespace Sample.City.Api.Controllers
         public async Task<IActionResult> Get([FromRoute]string code)
         {
             City result = _cities.Find(s => s.CityCode.Equals(code, StringComparison.CurrentCultureIgnoreCase));
+            await Task.Yield();
             return (IActionResult)Ok(result);
         }
 
@@ -54,6 +56,7 @@ namespace Sample.City.Api.Controllers
         public async Task<IActionResult> GetCities([FromRoute]string stateCode)
         {
             List<City> result = _cities.FindAll(s => s.StateCode.Equals(stateCode, StringComparison.CurrentCultureIgnoreCase));
+            await Task.Yield();
             return (IActionResult)Ok(result);
         }
 
@@ -64,6 +67,8 @@ namespace Sample.City.Api.Controllers
         {
             List<City> result = _cities.FindAll(s => s.StateCode.Equals(stateCode, StringComparison.CurrentCultureIgnoreCase)
                                         && s.CityCode.Equals(cityCode, StringComparison.CurrentCultureIgnoreCase));
+            await Task.Yield();
+
             if (result?.Count > 0)
                 return (IActionResult)Ok(result[0]);
 

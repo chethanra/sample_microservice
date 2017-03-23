@@ -26,6 +26,7 @@ namespace sample.state.api.Controllers
         [ProducesResponseType(typeof(IReadOnlyCollection<State>), 200)]
         public async Task<IActionResult> Get()
         {
+            await Task.Yield();
             return (IActionResult)Ok(_stateTable);
         }
 
@@ -34,6 +35,7 @@ namespace sample.state.api.Controllers
         [ProducesResponseType(typeof(State), 200)]
         public async Task<IActionResult> Get([FromRoute]string code)
         {
+            await Task.Yield();
             State result = _stateTable.Find(s => s.StateCode.Equals(code, StringComparison.CurrentCultureIgnoreCase));
             return (IActionResult)Ok(result);
         }
