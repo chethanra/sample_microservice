@@ -1,0 +1,19 @@
+<div class="card-container">
+  <h1 x-large class="sample-content">State & City</h1>
+  <div>
+    <h4>State</h4>
+    <div>
+      <select name="state" (change)="onStateChange($event.target.value)">
+        <option value="">Select State</option>
+        <option *ngFor="let state of states" value="{{state.StateCode}}">{{state.StateName}}</option>
+      </select>
+    </div>    
+    <h4>City</h4>
+    <div>
+      <select name="city">
+        <option value="">Select City</option>
+        <option *ngFor="let city of cities" value="{{city.CityCode}}">{{city.CityName}}</option>
+      </select>
+    </div>    
+  </div>
+</div>
